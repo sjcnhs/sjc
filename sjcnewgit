@@ -1,0 +1,137 @@
+import streamlit as st
+from PIL import Image
+
+# Import and resize the logo image
+logo_path = r"C:\Users\OMEN\Desktop\personal folder\pictures\logosjcnhs--preview.png"
+logo_image = Image.open(logo_path)
+logo_image_resized = logo_image.resize((150, 150))  # Adjust the size as per your preference
+
+# Set the page configuration
+st.set_page_config(
+    page_title="San Jose City National High School-Senior High School",
+    page_icon="",
+    layout="centered"
+)
+
+# Add custom CSS to modify the background color and text color
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #f0f0f0;  /* Set your desired background color */
+        color: #000000;  /* Set your desired text color */
+        margin: 0;  /* Remove default margin */
+    }
+
+    /* Position the columns at the center of the webpage */
+    .columns-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* Style the column window */
+    .column-window {
+        background-color: #ffffff;  /* Set the background color */
+        border: 1px solid #e0e0e0;  /* Set the border */
+        border-radius: 10px;  /* Set the border radius */
+        padding: 20px;  /* Set the padding */
+        width: 600px;  /* Set the width */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);  /* Add a box shadow */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Create a session state to keep track of login status
+class SessionState:
+    logged_in = False
+
+# Initialize the session state
+session_state = SessionState()
+
+# Display the logo image
+st.image(logo_image_resized, use_column_width=False)
+
+# Title
+st.title("San Jose City National High School Senior High")
+
+# Header
+st.header("Welcome to our Senior High program!")
+
+if not session_state.logged_in:
+    # Column 2: Sign In
+    with st.expander("Sign In"):
+        # Email and Password inputs
+        email = st.text_input("Email")
+        password = st.text_input("Password", type="password")
+
+        # Sign In button
+        if st.button("Sign In"):
+            if email == "yasuothewind54@gmail.com" and password == "yasuothewind321@gmail.com":
+                session_state.logged_in = True
+                st.success("You have successfully signed in!")
+                # Clear the input fields
+                email = ""
+                password = ""
+            elif email == "bardardary@gmail.com" and password == "KKKkkk111":
+                session_state.logged_in = True
+                st.success("You have successfully signed in!")
+                # Clear the input fields
+                email = ""
+                password = ""
+            else:
+                st.error("Invalid email or password!")
+
+# Column 1: Main Page Content
+with st.container():
+    # Introduction
+    st.write("At San Jose City National High School, we offer a comprehensive Senior High program "
+             "that prepares students for their future endeavors.")
+
+    # Programs Offered
+    st.markdown("---")
+    st.subheader("Programs Offered")
+    st.write("1. Academic Track")
+    st.write("2. Technical-Vocational Livelihood (TVL) Track")
+
+    # Admission Requirements
+    st.markdown("---")
+    st.subheader("Admission Requirements")
+    st.write("To apply for Senior High, please prepare the following documents:")
+    st.write("- Accomplished Application Form")
+    st.write("- Photocopy of Junior High School Report Card")
+    st.write("- Good Moral Character Certificate")
+    st.write("- Birth Certificate (NSO/PSA copy)")
+    st.write("- 2x2 ID Photo (recent)")
+
+    # Contact Information
+    st.markdown("---")
+    st.subheader("Contact Information")
+    st.write("For inquiries, please contact:")
+    st.write("- Phone: 123-456-7890")
+    st.write("- Email: sjcnhs@example.com")
+
+if session_state.logged_in:
+    # Additional Feature: Student Resources
+    st.markdown("---")
+    st.subheader("Additional Feature: Student Resources")
+    st.write("Here are some resources available to our Senior High students:")
+    st.write("- Course materials and lecture notes")
+    st.write("- Student forums and discussion boards")
+    st.write("- Online library access")
+
+    # Additional Feature: Student Announcements
+    st.markdown("---")
+    st.subheader("Additional Feature: Student Announcements")
+    st.write("Stay updated with the latest announcements:")
+    st.write("- Important dates and deadlines")
+    st.write("- School events and activities")
+    st.write("- Reminders from faculty and staff")
+
+    # Additional Feature: Logout button
+    if st.button("Logout"):
+        session_state.logged_in = False
+        st.info("You have been logged out!")
